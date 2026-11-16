@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h1 class="h3 card-title">{{ thread.title }}</h1>
+    <p class="text-muted small">
+      도서: {{ thread.book.title }} · 작성자: {{ thread.user }} · 독서일: {{ thread.read_date|date:"Y-m-d" }}
+    </p>
+    <p class="card-text">{{ thread.content|linebreaksbr }}</p>
+    <p class="small mb-0">좋아요 {{ thread.like_users.count }}개</p>
+  </div>
+  <div class="card-footer d-flex gap-2">
+    <a href="{% url 'books:detail' thread.book.pk %}" class="btn btn-outline-secondary btn-sm">도서로 돌아가기</a>
+
+    {% if request.user.is_authenticated %}
+      <form action="{% url 'books:like' thread.pk %}" method="POST">
+        {% csrf_token %}
+        {% if request.user in thread.like_users.all %}
+          <button type="submit" class="btn btn-danger btn-sm">좋아요 취소</button>
+        {% else %}
+          <button type="submit" class="btn btn-outline-danger btn-sm">좋아요</button>
+        {% endif %}
+      </form>
+    {% endif %}
+
+    {% if request.user == thread.user %}
+      <a href="{% url 'books:thread_update' thread.pk %}" class="btn btn-outline-primary btn-sm">수정하기</a>
+      <form action="{% url 'books:thread_delete' thread.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-danger btn-sm">삭제하기</button>
+      </form>
+    {% endif %}
+  </div>
+</div>
+
+<div class="mt-4">
+  <h2 class="h5">댓글 {{ thread.comment_set.count }}개</h2>
+
+  <ul class="list-group mb-3">
+    {% for comment in thread.comment_set.all %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <span>{{ comment.content }}</span>
+          <a href="{% url 'accounts:profile' comment.user.username %}" class="small text-muted ms-2">
+            작성자: {{ comment.user.username }}
+          </a>
+        </div>
+        {% if request.user == comment.user %}
+          <form action="{% url 'books:comment_delete' comment.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger btn-sm">삭제</button>
+          </form>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li class="list-group-item text-muted">작성된 댓글이 없습니다.</li>
+    {% endfor %}
+  </ul>
+
+  {% if request.user.is_authenticated %}
+    <form action="{% url 'books:comment_create' thread.pk %}" method="POST" class="d-flex gap-2">
+      {% csrf_token %}
+      <input type="text" name="content" class="form-control" maxlength="200"
+             placeholder="댓글을 입력하세요" required>
+      <button type="submit" class="btn btn-primary">작성</button>
+    </form>
+  {% else %}
+    <p class="text-muted">로그인 후 댓글을 작성할 수 있습니다.</p>
+  {% endif %}
+</div>
+{% endblock content %}

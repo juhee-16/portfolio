@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}누리과정 그림책 수업 플래너{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'library/style.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <div class="app">
+    {% block sidebar %}{% endblock %}
+    <main class="main">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  <div class="loading" id="loading" hidden>
+    <div class="loading__box">
+      <div class="loading__book" id="loading-icon">📖</div>
+      <p id="loading-text">수업 가이드를 만들고 있어요…</p>
+    </div>
+  </div>
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

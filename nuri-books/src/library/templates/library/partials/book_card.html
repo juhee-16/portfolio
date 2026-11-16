@@ -1,0 +1,15 @@
+<label class="book-card">
+  <input type="radio" name="isbn" value="{{ b.isbn13 }}" {% if b.isbn13 == isbn %}checked{% endif %} onchange="this.form.submit()">
+  <div class="book-card__body">
+    {% if b.bookImageURL %}
+      <img class="book-card__cover" src="{{ b.bookImageURL }}" alt="{{ b.bookname }} 표지" loading="lazy">
+    {% else %}
+      <div class="book-card__cover book-card__cover--empty">📕</div>
+    {% endif %}
+    <div class="book-card__info">
+      <strong class="book-card__title">{{ b.bookname }}</strong>
+      <span class="book-card__meta">{{ b.authors }}{% if b.publisher %} · {{ b.publisher }}{% endif %}</span>
+      <p class="book-card__summary">{{ b.summary|default:"소개글이 없어요" }}</p>
+    </div>
+  </div>
+</label>

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+  {% include "library/partials/sidebar.html" %}
+{% endblock %}
+
+{% block content %}
+  <header class="hero">
+    <h1>누리과정 그림책 수업 플래너</h1>
+    <p>2019 개정 누리과정 기반 교실 수업 설계 · 확장 활동 가이드</p>
+  </header>
+
+  {% if error %}<div class="alert alert--error">{{ error }}</div>{% endif %}
+
+  {% if not book %}
+    <section class="empty">
+      <div class="empty__icon">🌈</div>
+      <h2>어떤 그림책으로 수업을 시작해 볼까요?</h2>
+      <ol class="empty__steps">
+        <li><b>누리과정 영역</b>과 <b>주제 키워드</b>를 고르거나 책 제목을 입력해요.</li>
+        <li>검색된 그림책 중 마음에 드는 책을 <b>선택</b>해요.</li>
+        <li>추천 질문을 누르면 <b>수업 설계안</b>이 만들어져요.</li>
+      </ol>
+    </section>
+
+    {% include "library/partials/discover.html" %}
+  {% else %}
+    {% include "library/partials/book_header.html" %}
+
+    <!-- 자주 묻는 수업 설계 질문 프리셋 버튼 -->
+    <div class="presets">
+      <div class="presets__title">
+        💡 자주 묻는 수업 설계 질문 <small>클릭하면 해당 내용이 생성돼요</small>
+      </div>
+      <div class="presets__buttons">
+        <form method="post" action="?{{ qs }}" class="js-generate" data-loading="누리과정 연계 내용을 정리하고 있어요…" data-icon="🌱" style="display:inline;">
+          {% csrf_token %}
+          <input type="hidden" name="preset" value="link">
+          <button type="submit" class="btn btn--preset">🌱 누리과정 영역 연계</button>
+        </form>
+
+        <form method="post" action="?{{ qs }}" class="js-generate" data-loading="확장 놀이 활동을 구상하고 있어요…" data-icon="🎨" style="display:inline;">
+          {% csrf_token %}
+          <input type="hidden" name="preset" value="extend">
+          <button type="submit" class="btn btn--preset">🎨 교실 수업 확장 활동</button>
+        </form>
+
+        <form method="post" action="?{{ qs }}" class="js-generate" data-loading="교사-유아 상호작용 가이드를 만들고 있어요…" data-icon="💬" style="display:inline;">
+          {% csrf_token %}
+          <input type="hidden" name="preset" value="interact">
+          <button type="submit" class="btn btn--preset">💬 교사-유아 상호작용 지침</button>
+        </form>
+      </div>
+    </div>
+
+    {% include "library/partials/chat.html" %}
+    {% include "library/partials/ask_form.html" %}
+  {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // 답변 생성 중 로딩 화면 제어
+  document.querySelectorAll('form.js-generate').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      if (e.submitter && (e.submitter.name === 'clear' || e.submitter.name === 'discover_clear')) return;
+      document.getElementById('loading-text').textContent =
+        form.dataset.loading || '수업 가이드를 만들고 있어요…';
+      document.getElementById('loading-icon').textContent = form.dataset.icon || '📖';
+      document.getElementById('loading').hidden = false;
+    });
+  });
+
+  // Enter로 전송, Shift+Enter로 줄바꿈
+  document.querySelectorAll('textarea[data-enter-submit]').forEach(function (ta) {
+    ta.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
+        e.preventDefault();
+        if (ta.value.trim()) {
+          ta.form.requestSubmit(ta.form.querySelector('button.btn--primary'));
+        }
+      }
+    });
+  });
+</script>
+{% endblock %}

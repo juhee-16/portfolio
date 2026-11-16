@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1 class="page-title">도서 등록</h1>
+  <form action="{% url 'books:create' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <button type="submit" class="btn-ink">등록하기</button>
+    <a href="{% url 'books:index' %}" class="btn-line">취소</a>
+  </form>
+{% endblock %}

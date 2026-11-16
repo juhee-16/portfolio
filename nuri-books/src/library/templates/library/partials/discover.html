@@ -1,0 +1,49 @@
+<section class="discover">
+  <h2>💬 어떤 수업을 하고 싶으세요?</h2>
+  <p class="muted">주제나 상황을 적으면 어울리는 그림책을 찾아드려요. 이어서 "더 쉬운 책으로", "다른 책도 보여줘"처럼 계속 물어볼 수 있어요.</p>
+
+  {% if discover_history %}
+    <div class="discover__chat">
+      {% for d in discover_history %}
+        <div class="discover__turn" {% if forloop.last %}id="discover-last"{% endif %}>
+          <div class="msg msg--q">🙋 {{ d.question }}</div>
+          {% if d.intro %}<p class="discover__intro">{{ d.intro }}</p>{% endif %}
+
+          <div class="discover__grid">
+            {% for b in d.books %}
+              <a class="discover-card" href="?isbn={{ b.isbn13 }}">
+                {% if b.bookImageURL %}
+                  <img src="{{ b.bookImageURL }}" alt="{{ b.bookname }} 표지" loading="lazy">
+                {% else %}
+                  <div class="discover-card__empty">📕</div>
+                {% endif %}
+                <div class="discover-card__info">
+                  <strong>{{ b.bookname }}</strong>
+                  <span class="muted">{{ b.authors }}{% if b.publisher %} · {{ b.publisher }}{% endif %}</span>
+                  {% if b.reason %}<p class="discover-card__reason">💡 {{ b.reason }}</p>{% endif %}
+                  <p class="discover-card__summary">{{ b.summary }}</p>
+                  <span class="discover-card__go">이 책으로 수업 설계하기 →</span>
+                </div>
+              </a>
+            {% endfor %}
+          </div>
+          <p class="hint">정보나루에서 실제로 확인된 책만 보여드려요.</p>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <form method="post" action="?{{ qs }}" class="discover__form discover__form--bottom js-generate"
+        data-loading="책을 찾는 중이에요…" data-icon="🔎">
+    {% csrf_token %}
+    <textarea name="discover_q" required data-enter-submit
+      placeholder="{% if discover_history %}이어서 물어보세요 (예: 더 쉬운 책으로 다시 추천해줘){% else %}예: 친구와 약속을 지키는 마음을 배우는 수업에 어울리는 그림책 추천해줘{% endif %}"></textarea>
+    <div class="discover__row">
+      <span class="hint">Enter 전송 · Shift+Enter 줄바꿈</span>
+      {% if discover_history %}
+        <button type="submit" name="discover_clear" value="1" class="btn btn--ghost" formnovalidate>대화 지우기</button>
+      {% endif %}
+      <button type="submit" class="btn btn--primary">검색하기 ↵</button>
+    </div>
+  </form>
+</section>

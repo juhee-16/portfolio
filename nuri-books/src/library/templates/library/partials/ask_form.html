@@ -1,0 +1,29 @@
+<form method="post" action="?{{ qs }}" class="ask js-generate" id="ask-form">
+  {% csrf_token %}
+  <textarea name="question" placeholder="이 그림책과 연계한 수업이나 활동에 대해 자유롭게 물어보세요" required></textarea>
+  
+  <!-- 답변 생성 중일 때 보여줄 로딩 문구 영역 -->
+  <div id="loading-message" style="display: none; margin-bottom: 8px; color: #555; font-size: 0.9rem;">
+    ⏳ 답변을 만드는 중입니다… 잠시만 기다려주세요.
+  </div>
+
+  <div class="ask__row">
+    <button type="submit" class="btn btn--primary" id="submit-btn">질문하기</button>
+    <button type="submit" name="clear" value="1" class="btn btn--ghost" formnovalidate>대화 지우기</button>
+  </div>
+</form>
+
+<!-- 버튼을 누르면 로딩 문구를 띄워주는 스크립트 -->
+<script>
+  document.getElementById('ask-form').addEventListener('submit', function(e) {
+    const textarea = this.querySelector('textarea[name="question"]');
+    const submitBtn = document.getElementById('submit-btn');
+    const loadingMsg = document.getElementById('loading-message');
+
+    if (textarea && textarea.value.trim() !== '') {
+      loadingMsg.style.display = 'block'; // 로딩 문구 표시
+      submitBtn.disabled = true;          // 버튼 비활성화
+      submitBtn.style.opacity = '0.6';
+    }
+  });
+</script>

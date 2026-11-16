@@ -1,0 +1,38 @@
+{% load md %}
+<section class="chat">
+  {% for h in history %}
+    <div class="msg msg--q">🙋 {{ h.question }}</div>
+    <article class="msg msg--a">
+      {% if h.topics %}
+        <div class="topics">
+          {% for t in h.topics %}<span class="topic">{{ t }}</span>{% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="answer">{{ h.answer|md }}</div>
+
+            <div class="sources">
+        {% if h.cited %}
+          <div class="sources__title">📎 답변에 사용한 근거 {{ h.cited|length }}건</div>
+          <ul>
+            {% for c in h.cited %}
+              <li>
+                [근거 {{ c.number }}]
+                <span class="topic">{% if c.source == "누리과정" %}📘 누리과정 원문{% else %}📚 도서 정보{% endif %}</span>
+                {{ c.title }}
+                <div class="muted">{{ c.text|truncatechars:80 }}</div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <div class="muted">ⓘ 답변에 인용된 근거가 없습니다.</div>
+        {% endif %}
+      </div>
+      <p class="disclaimer">{{ disclaimer }}</p>
+    </article>
+  {% empty %}
+    <div class="empty" style="padding: 30px; margin-top: 10px;">
+      <p style="color: var(--muted); margin: 0;">수업 설계 질문 버튼을 누르거나 아래에 직접 질문을 입력해 보세요!</p>
+    </div>
+  {% endfor %}
+</section>

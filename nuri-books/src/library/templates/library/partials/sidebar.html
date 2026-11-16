@@ -1,0 +1,67 @@
+<aside class="sidebar">
+  <div class="brand">
+    <span class="brand__icon">📚</span>
+    <div>
+      <div class="brand__title">그림책 찾기</div>
+      <div class="brand__sub">유아동 그림책 검색</div>
+    </div>
+  </div>
+
+  <form method="get" id="filter-form" class="filter">
+
+    <div class="step">
+      <label class="step__label"><span class="step__num">1</span>누리과정 영역</label>
+      <select name="area">
+      <option value="">전체 영역</option>
+      {% for a in areas %}
+        <option value="{{ a.area_id }}" {% if a.area_id == area_id %}selected{% endif %}>{{ a.area }}</option>
+      {% endfor %}
+    </select>
+    </div>
+
+    <div class="step">
+      <label class="step__label">직접 검색 <small>(책 제목·주제)</small></label>
+      <input type="text" name="q" value="{{ query }}" placeholder="예: 알사탕, 친구, 바다">
+    </div>
+
+    <div class="step">
+      <label class="step__label"><span class="step__num">2</span>월별 놀이 주제 키워드</label>
+      <div class="kw-box">
+        <div class="kw-group">
+          <div class="kw-group__chips">
+            {% for k in monthly_keywords %}
+              <label class="chip">
+                <input type="checkbox" name="keywords" value="{{ k }}" {% if k in keywords %}checked{% endif %}>
+                <span>{{ k }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <p class="hint">다른 주제는 아래 직접 검색에 입력하거나, 화면 속 질문창에서 AI에게 물어보세요.</p>
+    </div>
+
+    <button type="submit" class="btn btn--primary btn--block">🔍 그림책 검색</button>
+    {% if terms %}<p class="hint">검색어: {{ terms|join:" · " }}</p>{% endif %}
+
+    {% if books %}
+      <div class="step__label step__label--list">추천받을 그림책 <span class="count">{{ books|length }}권</span></div>
+      <div class="book-list">
+        {% for b in books %}
+          {% include "library/partials/book_card.html" %}
+        {% endfor %}
+      </div>
+    {% elif terms %}
+      <p class="hint">검색 결과가 없어요. 다른 키워드로 시도해 보세요.</p>
+    {% endif %}
+  </form>
+
+  <div class="guide">
+    <h3>👩‍🏫 수업 설계 모드</h3>
+    <ul>
+      <li>누리과정 영역·내용 연계</li>
+      <li>교실 수업 확장 활동 제안</li>
+      <li>교사-유아 상호작용 지침</li>
+    </ul>
+  </div>
+</aside>

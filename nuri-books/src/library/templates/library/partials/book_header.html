@@ -1,0 +1,16 @@
+<section class="book-header">
+  {% if book.bookImageURL %}
+    <img class="book-header__cover" src="{{ book.bookImageURL }}" alt="표지">
+  {% else %}
+    <div class="book-header__cover book-header__cover--empty">📕</div>
+  {% endif %}
+  <div class="book-header__info">
+    <span class="badge">선택한 그림책</span>
+    <h2>{{ book.bookname }}</h2>
+    <p class="muted">{{ book.authors }}{% if book.publisher %} · {{ book.publisher }}{% endif %}</p>
+        <a href="?" class="btn btn--ghost">← 추천 목록으로</a>
+    {% if book.description %}
+      <p class="book-header__desc">{{ book.description|truncatechars:160 }}</p>
+    {% endif %}
+  </div>
+</section>
