@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>최주희 | EdTech & AI Service Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --primary: #4f46e5;
+      --primary-light: #eef2ff;
+      --accent: #0d9488;
+      --accent-light: #f0fdfa;
+      --text-main: #0f172a;
+      --text-sub: #475569;
+      --text-muted: #94a3b8;
+      --border: #e2e8f0;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 20px 35px -10px rgba(79, 70, 229, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-sub);
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    /* Intro Hero */
+    .intro-section {
+      text-align: center;
+      max-width: 760px;
+      margin: 1rem auto 4rem;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.9rem;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    .intro-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+
+    .intro-title span {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .intro-desc {
+      font-size: 1.1rem;
+      color: var(--text-sub);
+      margin-bottom: 1.75rem;
+    }
+
+    .intro-actions {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.4rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: #4338ca;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: var(--surface);
+      color: var(--text-main);
+      border-color: var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Section Header */
+    .section-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Featured Project: NuriBooks */
+    .featured-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .featured-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .featured-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+    }
+
+    .tag-solo {
+      background: #fef3c7;
+      color: #b45309;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 9999px;
+    }
+
+    .tag-domain {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 9999px;
+    }
+
+    .featured-title {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .featured-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-sub);
+      margin-top: 0.35rem;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+      align-items: start;
+    }
+
+    .problem-solution-box {
+      background: var(--bg);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .ps-item + .ps-item {
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    .ps-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .ps-text {
+      font-size: 0.95rem;
+      color: var(--text-sub);
+    }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .feature-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.15rem 1.25rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .feature-item:hover {
+      transform: translateX(4px);
+      border-color: var(--primary);
+    }
+
+    .feature-item h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: var(--text-main);
+    }
+
+    .feature-item p {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .tech-badge {
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.35rem 0.8rem;
+      border-radius: 0.5rem;
+      background: #f1f5f9;
+      color: #334155;
+    }
+
+    /* Other Projects Section */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1.1rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-sub);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--text-main);
+      color: #fff;
+      border-color: var(--text-main);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: #cbd5e1;
+    }
+
+    .card-category {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--text-sub);
+      margin-bottom: 1.25rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid #f1f5f9;
+      margin-top: auto;
+    }
+
+    .card-links {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .link-code {
+      color: var(--text-sub);
+    }
+
+    .link-code:hover {
+      color: var(--text-main);
+    }
+
+    .link-detail {
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 1.5rem;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--surface);
+      border-radius: 1.5rem;
+      max-width: 620px;
+      width: 100%;
+      padding: 2rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: #f1f5f9;
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: var(--text-sub);
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-body p {
+      color: var(--text-sub);
+      margin-bottom: 1rem;
+      font-size: 0.96rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .intro-title {
+        font-size: 1.9rem;
+      }
+      .featured-grid {
+        grid-template-columns: 1fr;
+      }
+      .featured-card {
+        padding: 1.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <span class="logo-dot"></span>
+        <span>JUHEE.PORTFOLIO</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#featured">핵심 개인 프로젝트</a>
+        <a href="#archive">전체 아카이브</a>
+        <a href="https://github.com/juhee-16/portfolio" target="_blank">GitHub ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Intro -->
+    <section class="intro-section">
+      <div class="badge-pill">✨ EdTech & AI Service Builder</div>
+      <h1 class="intro-title">
+        유아교육 현장의 이해에<br />
+        <span>AI와 데이터 기술</span>을 더합니다
+      </h1>
+      <p class="intro-desc">
+        현장 교사로서 겪은 실제 문제를 소프트웨어와 RAG 기반 AI 솔루션으로 해결하는<br />
+        서비스 기획 및 풀스택 개발 포트폴리오입니다.
+      </p>
+      <div class="intro-actions">
+        <a href="#featured" class="btn btn-primary">대표 개인 프로젝트 보기</a>
+        <a href="https://github.com/juhee-16/portfolio" target="_blank" class="btn btn-outline">GitHub 저장소 바로가기</a>
+      </div>
+    </section>
+
+    <!-- Featured Solo Project: NuriBooks -->
+    <section id="featured">
+      <div class="section-label">Featured Solo Project</div>
+      <h2 class="section-title">가장 공들여 설계한 개인 프로젝트</h2>
+
+      <article class="featured-card">
+        <div class="featured-header">
+          <div>
+            <div class="featured-tags">
+              <span class="tag-solo">★ 1인 기획 · AI RAG 개발</span>
+              <span class="tag-domain">유아교육 · 누리과정 · 에듀테크</span>
+            </div>
+            <h3 class="featured-title">누리북스 (NuriBooks)</h3>
+            <p class="featured-subtitle">
+              누리과정 교육목표와 그림책 데이터를 연계하여 교사의 수업 준비·놀이 계획·맞춤형 발문을 지원하는 AI RAG 서비스
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+            <a href="https://github.com/juhee-16/portfolio/tree/main/%EB%88%84%EB%A6%AC%EB%B6%81%EC%8A%A4" target="_blank" class="btn btn-primary">
+              코드 폴더 보기 ↗
+            </a>
+            <button class="btn btn-outline" onclick="openModal('nuribooks')">기획·아키텍처 상세</button>
+          </div>
+        </div>
+
+        <div class="featured-grid">
+          <div class="problem-solution-box">
+            <div class="ps-item">
+              <div class="ps-title">💡 기획 배경 (현장의 문제)</div>
+              <p class="ps-text">
+                유치원·어린이집 교사들은 매월 누리과정 영역에 맞는 그림책을 선정하고, 아이들의 발달 수준과 흥미에 연결되는 놀이 확장안 및 상호작용 발문을 직접 고민하느라 수업 준비에 많은 시간을 쏟습니다.
+              </p>
+            </div>
+            <div class="ps-item">
+              <div class="ps-title">🚀 해결 방식 (RAG 기반 AI)</div>
+              <p class="ps-text">
+                단순 범용 LLM의 할루시네이션을 줄이기 위해 <strong>누리과정 핵심 데이터와 그림책 메타데이터를 벡터화하여 연계</strong>했습니다. 교사가 학급 연령이나 주제를 입력하면 교육적 근거가 명확한 그림책 추천부터 실제 현장에서 바로 쓸 수 있는 발문까지 생성합니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <h4>1. 누리과정 × 그림책 데이터 RAG 검색</h4>
+              <p>5개 영역(신체운동·건강, 의사소통, 사회관계, 예술경험, 자연탐구) 및 월별 생활주제와 연동된 그림책 매칭</p>
+            </div>
+            <div class="feature-item">
+              <h4>2. 월별·주간 놀이 계획안 자동 구성</h4>
+              <p>선정된 그림책을 중심으로 대·소집단 활동 및 자유놀이 확장 아이디어를 교사 워크플로우에 맞춰 구조화</p>
+            </div>
+            <div class="feature-item">
+              <h4>3. 연령별 맞춤형 교사 발문 생성</h4>
+              <p>그림책 장면별 도입·전개·마무리 단계에 맞춰 아이들의 사고를 확장하는 열린 질문(발문) 가이드 제공</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-stack">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">RAG (Retrieval-Augmented Generation)</span>
+          <span class="tech-badge">LLM API</span>
+          <span class="tech-badge">Vector DB / Embedding</span>
+          <span class="tech-badge">Prompt Engineering</span>
+          <span class="tech-badge">EdTech Service Planning</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- Other Projects Archive -->
+    <section id="archive">
+      <div class="section-label">Project Archive</div>
+      <h2 class="section-title">웹 개발 및 데이터 · 관통 프로젝트</h2>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">전체 보기 (9)</button>
+        <button class="filter-btn" data-filter="solo">개인 프로젝트</button>
+        <button class="filter-btn" data-filter="web">웹 · 대시보드</button>
+        <button class="filter-btn" data-filter="pjt">관통 프로젝트 (02~08)</button>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid"></div>
+    </section>
+  </main>
+
+  <!-- Detail Modal -->
+  <div class="modal-backdrop" id="modalBackdrop" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="card-category" id="modalCategory"></div>
+      <h3 class="modal-title" id="modalTitle"></h3>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="tech-stack" id="modalTech"></div>
+      <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end;">
+        <a id="modalGithubLink" href="#" target="_blank" class="btn btn-primary">GitHub 폴더에서 코드 보기 ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Choi Ju-hee. Built with HTML/CSS/JS & Hosted on GitHub Pages.</p>
+  </footer>
+
+  <script>
+    const REPO_BASE = "https://github.com/juhee-16/portfolio/tree/main";
+
+    const projects = [
+      {
+        id: "nuribooks",
+        category: "solo",
+        categoryLabel: "개인 프로젝트 · AI RAG",
+        title: "누리북스 (NuriBooks)",
+        desc: "누리과정 교육과정과 그림책 데이터를 연계해 교사의 수업 준비, 월별 놀이 계획, 맞춤형 발문을 지원하는 AI RAG 서비스입니다.",
+        folder: "%EB%88%84%EB%A6%AC%EB%B6%81%EC%8A%A4",
+        tech: ["Python", "RAG", "LLM", "Vector Search", "EdTech"],
+        detail: [
+          "유아교육 현장 경험을 바탕으로 교사가 실제 수업 준비 과정에서 겪는 자료 탐색 및 발문 설계의 비효율을 해결하기 위해 기획·개발했습니다.",
+          "누리과정 영역별 목표와 그림책 데이터베이스를 기반으로 검색 증강 생성(RAG) 파이프라인을 구축하여 교육적 맥락에 부합하는 놀이 계획안과 연령별 발문을 제공합니다."
+        ]
+      },
+      {
+        id: "busan",
+        category: "web",
+        categoryLabel: "웹 · 대시보드 프로젝트",
+        title: "Busan Travel Dashboard",
+        desc: "부산 여행 정보와 데이터를 시각적으로 탐색할 수 있도록 구성한 여행 대시보드 웹 프로젝트입니다.",
+        folder: "busan_travel-dashboard",
+        tech: ["HTML/CSS", "JavaScript", "Vue / Frontend", "Data Visualization"],
+        detail: [
+          "사용자 친화적인 대시보드 레이아웃을 통해 여행지 정보와 주요 데이터를 직관적으로 확인할 수 있도록 설계했습니다.",
+          "프론트엔드 상태 관리 및 컴포넌트 구조화에 중점을 두고 구현했습니다."
+        ]
+      },
+      {
+        id: "pjt08",
+        category: "pjt",
+        categoryLabel: "관통 프로젝트 08",
+        title: "08-PJT (웹 · 데이터 통합 프로젝트)",
+        desc: "백엔드 API와 프론트엔드 인터랙션을 결합해 데이터 조회 및 사용자 기능을 구현한 프로젝트입니다.",
+        folder: "pjt-08",
+        tech: ["Python", "Django", "JavaScript", "REST API"],
+        detail: [
+          "비동기 통신과 백엔드 데이터 처리를 연계하여 웹 애플리케이션의 핵심 CRUD 및 사용자 경험을 구현했습니다."
+        ]
+      },
+      {
+        id: "pjt07",
+        category: "pjt",
+        categoryLabel: "관통 프로젝트 07",
+        title: "07-PJT (REST API 설계 및 구현)",
+        desc: "Django REST Framework를 활용해 데이터 모델링과 직렬화(Serializer), API 엔드포인트를 구축한 프로젝트입니다.",
+        folder: "07-pjt",
+        tech: ["Python", "Django REST Framework", "SQLite"],
+        detail: [
+          "관계형 데이터베이스 설계(1:N, M:N)와 RESTful API 규칙에 맞춘 백엔드 서버 아키텍처를 구현했습니다."
+        ]
+      },
+      {
+        id: "pjt06",
+        category: "pjt",
+        categoryLabel: "관통 프로젝트 06",
+        title: "06-PJT (데이터베이스 · 웹 연동)",
+        desc: "DB 모델 관계 설정 및 사용자 인증·권한 처리를 포함한 웹 서비스 구현 프로젝트입니다.",
+        folder: "06-pjt",
+        tech: ["Python", "Django", "ORM", "HTML/CSS"],
+        detail: [
+          "Django ORM을 활용한 효율적인 쿼리 처리와 사용자 인증 흐름을 구현했습니다."
+        ]
+      },
+      {
+        id: "pjt05",
+        category: "pjt",
+        categoryLabel: "관통 프로젝트 05",
+        title: "05-PJT (웹 크롤링 · 데이터 분석)",
+        desc: "외부 웹 데이터를 수집·정제하고 분석 결과를 웹 화면에 시각화한 데이터 기반 프로젝트입니다.",
+        folder: "pjt05",
+        tech: ["Python", "Crawling", "Data Processing", "Django"],
+        detail: [
+          "필요한 데이터를 자동으로 수집하고 정제 파이프라인을 거쳐 서비스에 반영하는 과정을 구현했습니다."
+        ]
+      },
+      {
+        id: "pjt04",
+        category: "pjt",
+        categoryLabel: "관통 프로젝트 04",
+        title: "04-PJT (데이터 시각화 · 웹 프레임워크)",
+        desc: "데이터 분석 결과를 차트와 템플릿으로 표현한 웹 애플리케이션 기초 프로젝트입니다.",
+        folder: "04-pjt",
+        tech: ["Python", "Django", "Matplotlib / Chart"],
+        detail: [
+          "데이터 전처리부터 웹 화면 렌더링까지의 전체 데이터 흐름을 다뤘습니다."
+        ]
+      },
+      {
+        id: "pjt03",
+        category: "pjt",
+        categoryLabel: "관통 프로젝트 03",
+        title: "03-PJT (반응형 웹 UI/UX 설계)",
+        desc: "웹 표준과 반응형 레이아웃을 적용해 다양한 화면 크기에 대응하는 프론트엔드 구현 프로젝트입니다.",
+        folder: "03-pjt",
+        tech: ["HTML5", "CSS3", "Responsive Web"],
+        detail: [
+          "시맨틱 마크업과 그리드 시스템을 활용해 가독성과 접근성을 높인 화면을 구성했습니다."
+        ]
+      },
+      {
+        id: "pjt02",
+        category: "pjt",
+        categoryLabel: "관통 프로젝트 02",
+        title: "02-PJT (API 데이터 수집 및 가공)",
+        desc: "오픈 API를 호출해 JSON 데이터를 파싱하고 조건별로 필터링·가공하는 파이썬 데이터 프로젝트입니다.",
+        folder: "02-pjt",
+        tech: ["Python", "Open API", "JSON"],
+        detail: [
+          "외부 API 연동 및 예외 처리, 데이터 구조 변환 로직을 Python으로 구현했습니다."
+        ]
+      }
+    ];
+
+    const grid = document.getElementById("projectsGrid");
+
+    function renderProjects(filter = "all") {
+      grid.innerHTML = "";
+      const filtered = filter === "all"
+        ? projects
+        : projects.filter(p => p.category === filter);
+
+      filtered.forEach(p => {
+        const card = document.createElement("article");
+        card.className = "project-card";
+        card.innerHTML = `
+          <div>
+            <div class="card-category">${p.categoryLabel}</div>
+            <h3 class="card-title">${p.title}</h3>
+            <p class="card-desc">${p.desc}</p>
+          </div>
+          <div>
+            <div class="tech-stack" style="margin-top:0; padding-top:0; border:none; margin-bottom:1rem;">
+              ${p.tech.slice(0, 3).map(t => `<span class="tech-badge">${t}</span>`).join("")}
+            </div>
+            <div class="card-footer">
+              <span class="link-detail" onclick="openModal('${p.id}')">상세 보기 →</span>
+              <a class="link-code" href="${REPO_BASE}/${p.folder}" target="_blank">GitHub 폴더 ↗</a>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderProjects(btn.dataset.filter);
+      });
+    });
+
+    function openModal(id) {
+      const p = projects.find(item => item.id === id);
+      if (!p) return;
+      document.getElementById("modalCategory").textContent = p.categoryLabel;
+      document.getElementById("modalTitle").textContent = p.title;
+      document.getElementById("modalBody").innerHTML = p.detail.map(text => `<p>${text}</p>`).join("");
+      document.getElementById("modalTech").innerHTML = p.tech.map(t => `<span class="tech-badge">${t}</span>`).join("");
+      document.getElementById("modalGithubLink").href = `${REPO_BASE}/${p.folder}`;
+      document.getElementById("modalBackdrop").classList.add("open");
+    }
+
+    function closeModal() {
+      document.getElementById("modalBackdrop").classList.remove("open");
+    }
+
+    renderProjects();
+  </script>
+</body>
+</html>
