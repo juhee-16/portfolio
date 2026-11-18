@@ -11,13 +11,12 @@
     :root {
       --bg: #f8f7fc;
       --surface: #ffffff;
-      /* PDF 4대 챕터 컬러 동기화 */
       --c-identity: #595959;
       --c-passion: #ff7675;
       --c-passion-bg: #fff0f0;
       --c-collabo: #3b82f6;
       --c-collabo-bg: #eff6ff;
-      --primary: #7c5dfa; /* 04. RESPECT 퍼플 */
+      --primary: #7c5dfa; 
       --primary-dark: #6344e5;
       --primary-light: #f2eeff;
       --text-main: #1e293b;
@@ -100,14 +99,12 @@
       color: var(--primary);
     }
 
-    /* Main Container */
     main {
       max-width: 1120px;
       margin: 0 auto;
       padding: 3rem 1.5rem 5rem;
     }
 
-    /* Intro Hero */
     .intro-section {
       text-align: center;
       max-width: 800px;
@@ -189,7 +186,6 @@
       color: var(--primary);
     }
 
-    /* 4 Chapters Story Strip (PDF Portfolio Connection) */
     .story-strip {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -205,10 +201,6 @@
       box-shadow: var(--shadow-sm);
       position: relative;
       overflow: hidden;
-    }
-
-    .story-card::top {
-      content: "";
     }
 
     .story-tab {
@@ -233,7 +225,6 @@
       line-height: 1.45;
     }
 
-    /* Section Header */
     .section-label {
       font-size: 0.85rem;
       font-weight: 700;
@@ -250,7 +241,6 @@
       margin-bottom: 1.75rem;
     }
 
-    /* Featured Project: NuriBooks */
     .featured-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -403,7 +393,6 @@
       color: #334155;
     }
 
-    /* Other Projects Section */
     .filter-bar {
       display: flex;
       gap: 0.5rem;
@@ -482,15 +471,10 @@
       margin-top: auto;
     }
 
-    .card-links {
-      display: flex;
-      gap: 0.75rem;
-      font-size: 0.88rem;
-      font-weight: 600;
-    }
-
     .link-code {
       color: var(--text-sub);
+      font-size: 0.88rem;
+      font-weight: 600;
     }
 
     .link-code:hover {
@@ -500,9 +484,10 @@
     .link-detail {
       color: var(--primary);
       cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 600;
     }
 
-    /* Modal */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -610,7 +595,6 @@
   </header>
 
   <main>
-    <!-- Hero Intro -->
     <section class="intro-section">
       <div class="badge-pill">✨ 존중을 설계하는 에듀테크 기획자 · 최주희</div>
       <h1 class="intro-title">
@@ -618,16 +602,16 @@
         <span>AI와 데이터 기술</span>을 더합니다
       </h1>
       <p class="intro-desc">
-        국공립 어린이집 보육 실무(1년 5개월)에서 체득한 현장 문제를<br />
+        국공립 어린이집(1년) 및 대학 부설 유치원(5개월) 현장에서 체득한 문제를<br />
         SSAFY 소프트웨어 및 RAG 기반 AI 솔루션으로 해결하는 기획·개발 포트폴리오입니다.
       </p>
       <div class="intro-actions">
         <a href="#featured" class="btn btn-primary">대표 AI 프로젝트 보기</a>
-        <a href="https://github.com/juhee-16/portfolio" target="_blank" class="btn btn-outline">GitHub 저장소 바로가기 ↗</a>
+        <a href="./포트폴리오_최주희.pdf" target="_blank" class="btn btn-outline">📄 PDF 포트폴리오 보기 ↗</a>
+        <a href="https://github.com/juhee-16/portfolio" target="_blank" class="btn btn-outline">GitHub 저장소 ↗</a>
       </div>
     </section>
 
-    <!-- PDF Portfolio 4 Chapters Connection Strip -->
     <section id="story" class="story-strip">
       <div class="story-card">
         <span class="story-tab" style="background: #595959;">01. IDENTITY</span>
@@ -651,7 +635,6 @@
       </div>
     </section>
 
-    <!-- Featured Solo Project: NuriBooks -->
     <section id="featured">
       <div class="section-label">04. RESPECT · Featured AI Project</div>
       <h2 class="section-title">누리과정 그림책 수업 플래너 : 누리북스 (NuriBooks)</h2>
@@ -669,7 +652,7 @@
             </p>
           </div>
           <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
-            <a href="https://github.com/juhee-16/portfolio/tree/main/%EB%88%84%EB%A6%AC%EB%B6%81%EC%8A%A4" target="_blank" class="btn btn-primary">
+            <a href="https://github.com/juhee-16/portfolio/tree/main/nuri-books" target="_blank" class="btn btn-primary">
               코드 폴더 보기 ↗
             </a>
             <button class="btn btn-outline" onclick="openModal('nuribooks')">기획·아키텍처 상세</button>
@@ -719,14 +702,13 @@
       </article>
     </section>
 
-    <!-- Other Projects Archive -->
     <section id="archive">
       <div class="section-label">Project Archive</div>
       <h2 class="section-title">에듀테크 기획 · 웹 개발 · 관통 프로젝트 아카이브</h2>
 
       <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">전체 보기 (11)</button>
-        <button class="filter-btn" data-filter="edtech">에듀테크 · AI (3)</button>
+        <button class="filter-btn active" data-filter="all">전체 보기 (12)</button>
+        <button class="filter-btn" data-filter="edtech">에듀테크 · AI (4)</button>
         <button class="filter-btn" data-filter="web">웹 · 대시보드 (1)</button>
         <button class="filter-btn" data-filter="pjt">SSAFY 관통 프로젝트 (7)</button>
       </div>
@@ -735,7 +717,6 @@
     </section>
   </main>
 
-  <!-- Detail Modal -->
   <div class="modal-backdrop" id="modalBackdrop" onclick="closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -763,24 +744,39 @@
         categoryLabel: "04. RESPECT · AI RAG 서비스",
         title: "누리북스 (NuriBooks)",
         desc: "누리과정 교육과정과 그림책 데이터를 연계해 교사의 수업 준비, 흥미영역 확장 놀이, 근거 기반 발문을 지원하는 AI RAG 웹 서비스입니다.",
-        folder: "%EB%88%84%EB%A6%AC%EB%B6%81%EC%8A%A4",
+        folder: "nuri-books",
+        demoUrl: "",
         tech: ["Python", "Django", "RAG", "Chroma DB", "OpenAI API"],
         detail: [
-          "국공립 어린이집 만 1세 담임교사 실무 경험을 바탕으로, 교사가 누리과정 영역에 맞는 그림책과 확장 놀이를 설계하는 시간을 줄이기 위해 기획·개발했습니다.",
+          "국공립 어린이집 담임교사(1년) 및 대학 부설 유치원(5개월) 실무 경험을 바탕으로, 교사가 누리과정 영역에 맞는 그림책과 확장 놀이를 설계하는 시간을 줄이기 위해 기획·개발했습니다.",
           "검색어 추출 → 후보 도서 수집 → 필터링 파이프라인을 구축했으며, 실제 검색된 도서 근거(근거 1~4)만을 바탕으로 답변하도록 할루시네이션 제어 프롬프트를 적용했습니다."
+        ]
+      },
+      {
+        id: "zep-solo",
+        category: "edtech",
+        categoryLabel: "03. COLLABO · 개인 메타버스 기획",
+        title: "ZEP 유아 직업·놀이 영역 체험 맵 (개인)",
+        desc: "유아가 가상 교실과 직업 체험 공간을 자유롭게 탐색하며 흥미영역별 놀이를 경험할 수 있도록 단독 기획·구축한 메타버스 맵입니다.",
+        folder: "",
+        demoUrl: "https://zep.us/play/yPVRJn",
+        tech: ["ZEP Metaverse", "1인 공간·동선 설계", "유아 놀이 중심 UX"],
+        detail: [
+          "유치원·어린이집 교실의 흥미영역 및 직업 체험 요소를 메타버스 공간으로 재해석하여 유아가 스스로 이동하며 탐색할 수 있는 직관적 맵을 단독 설계했습니다.",
+          "시각적 안내 오브젝트와 상호작용 포인트를 배치해 유아 눈높이에서 쉽게 이해하고 몰입할 수 있는 디지털 놀이 환경을 구현했습니다."
         ]
       },
       {
         id: "zep-edu",
         category: "edtech",
-        categoryLabel: "03. COLLABO · 메타버스 기획",
-        title: "ZEP 메타버스 유아 교육 프로젝트",
-        desc: "유아 직업·영역별 놀이 체험 맵 및 5단계 스토리텔링 기반 통일 교육 방탈출 메타버스 게임을 기획·구축했습니다.",
+        categoryLabel: "03. COLLABO · 팀 메타버스 기획",
+        title: "ZEP 통일 교육 방탈출 메타버스 게임 (팀)",
+        desc: "5단계 스토리텔링 미션과 퀴즈를 결합해 유아·초등 학습자가 놀이처럼 평화와 통일의 가치를 익히도록 협업 개발한 교육 게임입니다.",
         folder: "",
-        tech: ["ZEP Metaverse", "게임화(Gamification)", "유아교육과정 설계"],
+        demoUrl: "https://zep.us/play/Vqx946",
+        tech: ["ZEP Metaverse", "게임화(Gamification)", "팀 협업·스토리텔링"],
         detail: [
-          "유아의 흥미와 자발적 몰입을 이끌기 위해 놀이 영역 탐색 맵과 단계별 스토리텔링 미션(방탈출 형식)을 ZEP 환경에 구현했습니다.",
-          "학습 목표를 직관적인 공간 동선과 상호작용 오브젝트로 풀어내어 디지털 환경에서도 유아 중심 놀이 경험이 이어지도록 설계했습니다."
+          "팀 협업을 통해 5단계 스토리텔링 구조와 단계별 방탈출 미션을 기획하여, 자칫 어렵게 느껴질 수 있는 통일 주제를 유아 눈높이의 참여형 놀이 콘텐츠로 풀어냈습니다."
         ]
       },
       {
@@ -790,6 +786,7 @@
         title: "스크래치 기반 유아 언어 교육 프로그램",
         desc: "캐릭터 ‘코캣’과 함께 한글 자음·모음을 탐색하며 방향키 조작과 기초 컴퓨팅 사고력을 익히는 인터랙티브 언어 놀이 프로그램입니다.",
         folder: "",
+        demoUrl: "https://scratch.mit.edu/projects/926136994/",
         tech: ["Scratch", "유아 언어교육", "인터랙티브 콘텐츠"],
         detail: [
           "유아가 친숙한 고양이 캐릭터를 직접 조작하며 한글 자음을 탐색할 수 있도록 시각·청각 피드백을 결합한 코딩 기반 언어 놀이 모듈을 설계했습니다."
@@ -802,6 +799,7 @@
         title: "Busan Travel Dashboard",
         desc: "부산 여행 정보와 데이터를 시각적으로 탐색할 수 있도록 구성한 여행 대시보드 웹 프로젝트입니다.",
         folder: "busan_travel-dashboard",
+        demoUrl: "",
         tech: ["HTML/CSS", "JavaScript", "Vue / Frontend", "Data Visualization"],
         detail: [
           "사용자 친화적인 대시보드 레이아웃을 통해 여행지 정보와 주요 데이터를 직관적으로 확인할 수 있도록 설계했습니다.",
@@ -815,6 +813,7 @@
         title: "08-PJT (웹 · 데이터 통합 프로젝트)",
         desc: "백엔드 API와 프론트엔드 인터랙션을 결합해 데이터 조회 및 사용자 기능을 구현한 프로젝트입니다.",
         folder: "pjt-08",
+        demoUrl: "",
         tech: ["Python", "Django", "JavaScript", "REST API"],
         detail: [
           "비동기 통신과 백엔드 데이터 처리를 연계하여 웹 애플리케이션의 핵심 CRUD 및 사용자 경험을 구현했습니다."
@@ -827,6 +826,7 @@
         title: "07-PJT (REST API 설계 및 구현)",
         desc: "Django REST Framework를 활용해 데이터 모델링과 직렬화(Serializer), API 엔드포인트를 구축한 프로젝트입니다.",
         folder: "07-pjt",
+        demoUrl: "",
         tech: ["Python", "Django REST Framework", "SQLite"],
         detail: [
           "관계형 데이터베이스 설계(1:N, M:N)와 RESTful API 규칙에 맞춘 백엔드 서버 아키텍처를 구현했습니다."
@@ -839,6 +839,7 @@
         title: "06-PJT (데이터베이스 · 웹 연동)",
         desc: "DB 모델 관계 설정 및 사용자 인증·권한 처리를 포함한 웹 서비스 구현 프로젝트입니다.",
         folder: "06-pjt",
+        demoUrl: "",
         tech: ["Python", "Django", "ORM", "HTML/CSS"],
         detail: [
           "Django ORM을 활용한 효율적인 쿼리 처리와 사용자 인증 흐름을 구현했습니다."
@@ -851,6 +852,7 @@
         title: "05-PJT (웹 크롤링 · 데이터 분석)",
         desc: "외부 웹 데이터를 수집·정제하고 분석 결과를 웹 화면에 시각화한 데이터 기반 프로젝트입니다.",
         folder: "pjt05",
+        demoUrl: "",
         tech: ["Python", "Crawling", "Data Processing", "Django"],
         detail: [
           "필요한 데이터를 자동으로 수집하고 정제 파이프라인을 거쳐 서비스에 반영하는 과정을 구현했습니다."
@@ -863,6 +865,7 @@
         title: "04-PJT (데이터 시각화 · 웹 프레임워크)",
         desc: "데이터 분석 결과를 차트와 템플릿으로 표현한 웹 애플리케이션 기초 프로젝트입니다.",
         folder: "04-pjt",
+        demoUrl: "",
         tech: ["Python", "Django", "Matplotlib / Chart"],
         detail: [
           "데이터 전처리부터 웹 화면 렌더링까지의 전체 데이터 흐름을 다뤘습니다."
@@ -875,6 +878,7 @@
         title: "03-PJT (반응형 웹 UI/UX 설계)",
         desc: "웹 표준과 반응형 레이아웃을 적용해 다양한 화면 크기에 대응하는 프론트엔드 구현 프로젝트입니다.",
         folder: "03-pjt",
+        demoUrl: "",
         tech: ["HTML5", "CSS3", "Responsive Web"],
         detail: [
           "시맨틱 마크업과 그리드 시스템을 활용해 가독성과 접근성을 높인 화면을 구성했습니다."
@@ -887,6 +891,7 @@
         title: "02-PJT (API 데이터 수집 및 가공)",
         desc: "오픈 API를 호출해 JSON 데이터를 파싱하고 조건별로 필터링·가공하는 파이썬 데이터 프로젝트입니다.",
         folder: "02-pjt",
+        demoUrl: "",
         tech: ["Python", "Open API", "JSON"],
         detail: [
           "외부 API 연동 및 예외 처리, 데이터 구조 변환 로직을 Python으로 구현했습니다."
@@ -905,7 +910,14 @@
       filtered.forEach(p => {
         const card = document.createElement("article");
         card.className = "project-card";
-        const githubUrl = p.folder ? `${REPO_BASE}/${p.folder}` : "https://github.com/juhee-16/portfolio";
+
+        let rightAction = `<span style="font-size: 0.82rem; color: var(--text-muted); font-weight: 600;">PDF 포트폴리오 수록</span>`;
+        if (p.demoUrl) {
+          rightAction = `<a class="link-code" style="color: var(--c-collabo); font-weight: 700;" href="${p.demoUrl}" target="_blank">직접 체험하기 ↗</a>`;
+        } else if (p.folder) {
+          rightAction = `<a class="link-code" href="${REPO_BASE}/${p.folder}" target="_blank">GitHub ↗</a>`;
+        }
+
         card.innerHTML = `
           <div>
             <div class="card-category">${p.categoryLabel}</div>
@@ -918,7 +930,7 @@
             </div>
             <div class="card-footer">
               <span class="link-detail" onclick="openModal('${p.id}')">상세 보기 →</span>
-              <a class="link-code" href="${githubUrl}" target="_blank">GitHub ↗</a>
+              ${rightAction}
             </div>
           </div>
         `;
@@ -941,7 +953,20 @@
       document.getElementById("modalTitle").textContent = p.title;
       document.getElementById("modalBody").innerHTML = p.detail.map(text => `<p>${text}</p>`).join("");
       document.getElementById("modalTech").innerHTML = p.tech.map(t => `<span class="tech-badge">${t}</span>`).join("");
-      document.getElementById("modalGithubLink").href = p.folder ? `${REPO_BASE}/${p.folder}` : "https://github.com/juhee-16/portfolio";
+
+      const actionBtn = document.getElementById("modalGithubLink");
+      if (p.demoUrl) {
+        actionBtn.style.display = "inline-flex";
+        actionBtn.textContent = "직접 체험하기 ↗";
+        actionBtn.href = p.demoUrl;
+      } else if (p.folder) {
+        actionBtn.style.display = "inline-flex";
+        actionBtn.textContent = "GitHub 폴더에서 보기 ↗";
+        actionBtn.href = `${REPO_BASE}/${p.folder}`;
+      } else {
+        actionBtn.style.display = "none";
+      }
+
       document.getElementById("modalBackdrop").classList.add("open");
     }
 
