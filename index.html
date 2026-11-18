@@ -3,25 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>최주희 | EdTech & AI Service Portfolio</title>
+  <title>최주희 | 존중을 설계하는 에듀테크 기획·개발 포트폴리오</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f8fafc;
+      --bg: #f8f7fc;
       --surface: #ffffff;
-      --primary: #4f46e5;
-      --primary-light: #eef2ff;
-      --accent: #0d9488;
-      --accent-light: #f0fdfa;
-      --text-main: #0f172a;
+      /* PDF 4대 챕터 컬러 동기화 */
+      --c-identity: #595959;
+      --c-passion: #ff7675;
+      --c-passion-bg: #fff0f0;
+      --c-collabo: #3b82f6;
+      --c-collabo-bg: #eff6ff;
+      --primary: #7c5dfa; /* 04. RESPECT 퍼플 */
+      --primary-dark: #6344e5;
+      --primary-light: #f2eeff;
+      --text-main: #1e293b;
       --text-sub: #475569;
       --text-muted: #94a3b8;
       --border: #e2e8f0;
       --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
-      --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
-      --shadow-lg: 0 20px 35px -10px rgba(79, 70, 229, 0.15);
+      --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.07);
+      --shadow-lg: 0 20px 35px -10px rgba(124, 93, 250, 0.16);
     }
 
     * {
@@ -48,7 +53,7 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
@@ -69,13 +74,17 @@
       color: var(--text-main);
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.55rem;
     }
 
-    .logo-dot {
-      width: 10px;
-      height: 10px;
-      background: var(--primary);
+    .logo-dots {
+      display: flex;
+      gap: 4px;
+    }
+
+    .logo-dots span {
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
     }
 
@@ -83,7 +92,7 @@
       display: flex;
       gap: 1.5rem;
       font-size: 0.95rem;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--text-sub);
     }
 
@@ -101,20 +110,20 @@
     /* Intro Hero */
     .intro-section {
       text-align: center;
-      max-width: 760px;
-      margin: 1rem auto 4rem;
+      max-width: 800px;
+      margin: 1rem auto 3.5rem;
     }
 
     .badge-pill {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      padding: 0.4rem 0.9rem;
+      gap: 0.45rem;
+      padding: 0.45rem 1rem;
       background: var(--primary-light);
       color: var(--primary);
       border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 0.88rem;
+      font-weight: 700;
       margin-bottom: 1.25rem;
     }
 
@@ -122,18 +131,18 @@
       font-size: 2.5rem;
       font-weight: 800;
       letter-spacing: -0.03em;
-      line-height: 1.25;
+      line-height: 1.28;
       margin-bottom: 1rem;
     }
 
     .intro-title span {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
+      background: linear-gradient(135deg, var(--primary), var(--c-collabo));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .intro-desc {
-      font-size: 1.1rem;
+      font-size: 1.08rem;
       color: var(--text-sub);
       margin-bottom: 1.75rem;
     }
@@ -161,11 +170,11 @@
     .btn-primary {
       background: var(--primary);
       color: #fff;
-      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+      box-shadow: 0 4px 14px rgba(124, 93, 250, 0.28);
     }
 
     .btn-primary:hover {
-      background: #4338ca;
+      background: var(--primary-dark);
       transform: translateY(-2px);
     }
 
@@ -178,6 +187,50 @@
     .btn-outline:hover {
       border-color: var(--primary);
       color: var(--primary);
+    }
+
+    /* 4 Chapters Story Strip (PDF Portfolio Connection) */
+    .story-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 4.5rem;
+    }
+
+    .story-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.15rem;
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-card::top {
+      content: "";
+    }
+
+    .story-tab {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.2rem 0.6rem;
+      border-radius: 0.4rem;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+
+    .story-card h3 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .story-card p {
+      font-size: 0.84rem;
+      color: var(--text-sub);
+      line-height: 1.45;
     }
 
     /* Section Header */
@@ -216,7 +269,7 @@
       left: 0;
       width: 100%;
       height: 6px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
+      background: linear-gradient(90deg, var(--c-passion), var(--c-collabo), var(--primary));
     }
 
     .featured-header {
@@ -235,9 +288,9 @@
       margin-bottom: 0.75rem;
     }
 
-    .tag-solo {
-      background: #fef3c7;
-      color: #b45309;
+    .tag-respect {
+      background: var(--primary-light);
+      color: var(--primary);
       font-weight: 700;
       font-size: 0.8rem;
       padding: 0.3rem 0.75rem;
@@ -245,8 +298,8 @@
     }
 
     .tag-domain {
-      background: var(--accent-light);
-      color: var(--accent);
+      background: var(--c-passion-bg);
+      color: #e11d48;
       font-weight: 600;
       font-size: 0.8rem;
       padding: 0.3rem 0.75rem;
@@ -267,7 +320,7 @@
 
     .featured-grid {
       display: grid;
-      grid-template-columns: 1.2fr 1fr;
+      grid-template-columns: 1.15fr 1fr;
       gap: 2rem;
       margin-top: 2rem;
       align-items: start;
@@ -287,7 +340,7 @@
     }
 
     .ps-title {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       font-weight: 700;
       color: var(--primary);
       margin-bottom: 0.4rem;
@@ -297,7 +350,7 @@
     }
 
     .ps-text {
-      font-size: 0.95rem;
+      font-size: 0.94rem;
       color: var(--text-sub);
     }
 
@@ -321,14 +374,14 @@
     }
 
     .feature-item h4 {
-      font-size: 1rem;
+      font-size: 0.98rem;
       font-weight: 700;
       margin-bottom: 0.25rem;
       color: var(--text-main);
     }
 
     .feature-item p {
-      font-size: 0.9rem;
+      font-size: 0.89rem;
       color: var(--text-sub);
     }
 
@@ -372,9 +425,9 @@
 
     .filter-btn.active,
     .filter-btn:hover {
-      background: var(--text-main);
+      background: var(--primary);
       color: #fff;
-      border-color: var(--text-main);
+      border-color: var(--primary);
     }
 
     .projects-grid {
@@ -512,6 +565,12 @@
       font-size: 0.9rem;
     }
 
+    @media (max-width: 900px) {
+      .story-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media (max-width: 768px) {
       .intro-title {
         font-size: 1.9rem;
@@ -522,6 +581,9 @@
       .featured-card {
         padding: 1.75rem;
       }
+      .story-strip {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -530,11 +592,17 @@
   <header>
     <div class="nav-container">
       <a href="#" class="logo">
-        <span class="logo-dot"></span>
+        <div class="logo-dots">
+          <span style="background: #595959;"></span>
+          <span style="background: #ff7675;"></span>
+          <span style="background: #3b82f6;"></span>
+          <span style="background: #7c5dfa;"></span>
+        </div>
         <span>JUHEE.PORTFOLIO</span>
       </a>
       <nav class="nav-links">
-        <a href="#featured">핵심 개인 프로젝트</a>
+        <a href="#story">4대 역량 연결</a>
+        <a href="#featured">핵심 AI 프로젝트</a>
         <a href="#archive">전체 아카이브</a>
         <a href="https://github.com/juhee-16/portfolio" target="_blank">GitHub ↗</a>
       </nav>
@@ -544,36 +612,60 @@
   <main>
     <!-- Hero Intro -->
     <section class="intro-section">
-      <div class="badge-pill">✨ EdTech & AI Service Builder</div>
+      <div class="badge-pill">✨ 존중을 설계하는 에듀테크 기획자 · 최주희</div>
       <h1 class="intro-title">
         유아교육 현장의 이해에<br />
         <span>AI와 데이터 기술</span>을 더합니다
       </h1>
       <p class="intro-desc">
-        현장 교사로서 겪은 실제 문제를 소프트웨어와 RAG 기반 AI 솔루션으로 해결하는<br />
-        서비스 기획 및 풀스택 개발 포트폴리오입니다.
+        국공립 어린이집 보육 실무(1년 5개월)에서 체득한 현장 문제를<br />
+        SSAFY 소프트웨어 및 RAG 기반 AI 솔루션으로 해결하는 기획·개발 포트폴리오입니다.
       </p>
       <div class="intro-actions">
-        <a href="#featured" class="btn btn-primary">대표 개인 프로젝트 보기</a>
-        <a href="https://github.com/juhee-16/portfolio" target="_blank" class="btn btn-outline">GitHub 저장소 바로가기</a>
+        <a href="#featured" class="btn btn-primary">대표 AI 프로젝트 보기</a>
+        <a href="https://github.com/juhee-16/portfolio" target="_blank" class="btn btn-outline">GitHub 저장소 바로가기 ↗</a>
+      </div>
+    </section>
+
+    <!-- PDF Portfolio 4 Chapters Connection Strip -->
+    <section id="story" class="story-strip">
+      <div class="story-card">
+        <span class="story-tab" style="background: #595959;">01. IDENTITY</span>
+        <h3>존중을 설계하는 기획자</h3>
+        <p>유아교육 전공 학점 3.98 및 보육 실무 경험에 SW·AI 역량을 결합한 도메인 특화 기획자</p>
+      </div>
+      <div class="story-card">
+        <span class="story-tab" style="background: #ff7675;">02. PASSION</span>
+        <h3>현장에서 답을 찾은 열정</h3>
+        <p>만 1세 놀이·행사 설계, 동요 그림악보·보드게임 등 유아 눈높이 실물 교구 및 콘텐츠 제작</p>
+      </div>
+      <div class="story-card">
+        <span class="story-tab" style="background: #3b82f6;">03. COLLABO</span>
+        <h3>기술과 협업으로 넓힌 확장력</h3>
+        <p>ZEP 메타버스 체험·통일 교육 게임 및 스크래치 기반 유아 언어 코딩 프로그램 기획</p>
+      </div>
+      <div class="story-card">
+        <span class="story-tab" style="background: #7c5dfa;">04. RESPECT</span>
+        <h3>기술로 완성하는 유아 존중 비전</h3>
+        <p>누리북스 AI RAG 수업 플래너 구현 및 유아 존중 UX 기반 에듀테크 서비스 설계</p>
       </div>
     </section>
 
     <!-- Featured Solo Project: NuriBooks -->
     <section id="featured">
-      <div class="section-label">Featured Solo Project</div>
-      <h2 class="section-title">가장 공들여 설계한 개인 프로젝트</h2>
+      <div class="section-label">04. RESPECT · Featured AI Project</div>
+      <h2 class="section-title">누리과정 그림책 수업 플래너 : 누리북스 (NuriBooks)</h2>
 
       <article class="featured-card">
         <div class="featured-header">
           <div>
             <div class="featured-tags">
-              <span class="tag-solo">★ 1인 기획 · AI RAG 개발</span>
-              <span class="tag-domain">유아교육 · 누리과정 · 에듀테크</span>
+              <span class="tag-respect">★ 1인 기획 · AI RAG 서비스 개발</span>
+              <span class="tag-domain">2019 개정 누리과정 · 도메인 특화 UX</span>
             </div>
             <h3 class="featured-title">누리북스 (NuriBooks)</h3>
             <p class="featured-subtitle">
-              누리과정 교육목표와 그림책 데이터를 연계하여 교사의 수업 준비·놀이 계획·맞춤형 발문을 지원하는 AI RAG 서비스
+              누리과정 5개 영역과 그림책 메타데이터를 연계해 교사의 수업 설계·흥미영역 확장 놀이·근거 기반 발문을 지원하는 AI RAG 웹 서비스
             </p>
           </div>
           <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
@@ -589,40 +681,40 @@
             <div class="ps-item">
               <div class="ps-title">💡 기획 배경 (현장의 문제)</div>
               <p class="ps-text">
-                유치원·어린이집 교사들은 매월 누리과정 영역에 맞는 그림책을 선정하고, 아이들의 발달 수준과 흥미에 연결되는 놀이 확장안 및 상호작용 발문을 직접 고민하느라 수업 준비에 많은 시간을 쏟습니다.
+                보육·유치원 교사들은 매월 누리과정 영역과 생활주제에 맞는 그림책을 선정하고, 교실 흥미영역(언어·미술·역할·쌓기)별 확장 놀이와 발문을 짜느라 수업 준비에 많은 시간을 쏟습니다.
               </p>
             </div>
             <div class="ps-item">
-              <div class="ps-title">🚀 해결 방식 (RAG 기반 AI)</div>
+              <div class="ps-title">🚀 해결 방식 (근거 기반 RAG & 할루시네이션 제어)</div>
               <p class="ps-text">
-                단순 범용 LLM의 할루시네이션을 줄이기 위해 <strong>누리과정 핵심 데이터와 그림책 메타데이터를 벡터화하여 연계</strong>했습니다. 교사가 학급 연령이나 주제를 입력하면 교육적 근거가 명확한 그림책 추천부터 실제 현장에서 바로 쓸 수 있는 발문까지 생성합니다.
+                질문에서 핵심 검색어를 추출하고 후보 도서 수집·필터링 파이프라인을 거쳐 <strong>검증된 도서 데이터(근거 1~4)만을 기반으로 수업안을 생성</strong>합니다. 근거에 없는 도서 정보는 임의로 지어내지 않고 명확히 구분하도록 설계했습니다.
               </p>
             </div>
           </div>
 
           <div class="feature-list">
             <div class="feature-item">
-              <h4>1. 누리과정 × 그림책 데이터 RAG 검색</h4>
-              <p>5개 영역(신체운동·건강, 의사소통, 사회관계, 예술경험, 자연탐구) 및 월별 생활주제와 연동된 그림책 매칭</p>
+              <h4>1. 교사 친화적 탐색 UX & 원클릭 프리셋 질문</h4>
+              <p>누리과정 5개 영역과 월별 놀이 키워드를 태그로 제공하고, ‘누리과정 연계·흥미영역 확장’ 등 현장 맞춤형 질문을 즉시 실행</p>
             </div>
             <div class="feature-item">
-              <h4>2. 월별·주간 놀이 계획안 자동 구성</h4>
-              <p>선정된 그림책을 중심으로 대·소집단 활동 및 자유놀이 확장 아이디어를 교사 워크플로우에 맞춰 구조화</p>
+              <h4>2. 도서 검색어 추출 및 후보 필터링 파이프라인</h4>
+              <p>사용자 입력에서 핵심 키워드를 추출해 도서 API 후보군을 수집하고 교육적 적합도 기준으로 최종 도서를 선별</p>
             </div>
             <div class="feature-item">
-              <h4>3. 연령별 맞춤형 교사 발문 생성</h4>
-              <p>그림책 장면별 도입·전개·마무리 단계에 맞춰 아이들의 사고를 확장하는 열린 질문(발문) 가이드 제공</p>
+              <h4>3. 근거 명시형 흥미영역 확장 놀이 가이드</h4>
+              <p>언어·미술·역할·쌓기 등 교실 영역별 확장 활동을 제안하며, 각 활동이 어떤 도서 근거에서 도출되었는지 투명하게 표기</p>
             </div>
           </div>
         </div>
 
         <div class="tech-stack">
-          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Python / Django</span>
           <span class="tech-badge">RAG (Retrieval-Augmented Generation)</span>
-          <span class="tech-badge">LLM API</span>
-          <span class="tech-badge">Vector DB / Embedding</span>
-          <span class="tech-badge">Prompt Engineering</span>
-          <span class="tech-badge">EdTech Service Planning</span>
+          <span class="tech-badge">Chroma Vector DB</span>
+          <span class="tech-badge">OpenAI Embeddings & LLM</span>
+          <span class="tech-badge">도서관 정보나루 API</span>
+          <span class="tech-badge">Hallucination Control</span>
         </div>
       </article>
     </section>
@@ -630,13 +722,13 @@
     <!-- Other Projects Archive -->
     <section id="archive">
       <div class="section-label">Project Archive</div>
-      <h2 class="section-title">웹 개발 및 데이터 · 관통 프로젝트</h2>
+      <h2 class="section-title">에듀테크 기획 · 웹 개발 · 관통 프로젝트 아카이브</h2>
 
       <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">전체 보기 (9)</button>
-        <button class="filter-btn" data-filter="solo">개인 프로젝트</button>
-        <button class="filter-btn" data-filter="web">웹 · 대시보드</button>
-        <button class="filter-btn" data-filter="pjt">관통 프로젝트 (02~08)</button>
+        <button class="filter-btn active" data-filter="all">전체 보기 (11)</button>
+        <button class="filter-btn" data-filter="edtech">에듀테크 · AI (3)</button>
+        <button class="filter-btn" data-filter="web">웹 · 대시보드 (1)</button>
+        <button class="filter-btn" data-filter="pjt">SSAFY 관통 프로젝트 (7)</button>
       </div>
 
       <div class="projects-grid" id="projectsGrid"></div>
@@ -651,14 +743,14 @@
       <h3 class="modal-title" id="modalTitle"></h3>
       <div class="modal-body" id="modalBody"></div>
       <div class="tech-stack" id="modalTech"></div>
-      <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end;">
-        <a id="modalGithubLink" href="#" target="_blank" class="btn btn-primary">GitHub 폴더에서 코드 보기 ↗</a>
+      <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 0.6rem;">
+        <a id="modalGithubLink" href="#" target="_blank" class="btn btn-primary">GitHub 폴더에서 보기 ↗</a>
       </div>
     </div>
   </div>
 
   <footer>
-    <p>© 2026 Choi Ju-hee. Built with HTML/CSS/JS & Hosted on GitHub Pages.</p>
+    <p>© 2026 Choi Ju-hee. 존중을 설계하는 에듀테크 기획자 · Built with HTML/CSS/JS</p>
   </footer>
 
   <script>
@@ -667,15 +759,40 @@
     const projects = [
       {
         id: "nuribooks",
-        category: "solo",
-        categoryLabel: "개인 프로젝트 · AI RAG",
+        category: "edtech",
+        categoryLabel: "04. RESPECT · AI RAG 서비스",
         title: "누리북스 (NuriBooks)",
-        desc: "누리과정 교육과정과 그림책 데이터를 연계해 교사의 수업 준비, 월별 놀이 계획, 맞춤형 발문을 지원하는 AI RAG 서비스입니다.",
+        desc: "누리과정 교육과정과 그림책 데이터를 연계해 교사의 수업 준비, 흥미영역 확장 놀이, 근거 기반 발문을 지원하는 AI RAG 웹 서비스입니다.",
         folder: "%EB%88%84%EB%A6%AC%EB%B6%81%EC%8A%A4",
-        tech: ["Python", "RAG", "LLM", "Vector Search", "EdTech"],
+        tech: ["Python", "Django", "RAG", "Chroma DB", "OpenAI API"],
         detail: [
-          "유아교육 현장 경험을 바탕으로 교사가 실제 수업 준비 과정에서 겪는 자료 탐색 및 발문 설계의 비효율을 해결하기 위해 기획·개발했습니다.",
-          "누리과정 영역별 목표와 그림책 데이터베이스를 기반으로 검색 증강 생성(RAG) 파이프라인을 구축하여 교육적 맥락에 부합하는 놀이 계획안과 연령별 발문을 제공합니다."
+          "국공립 어린이집 만 1세 담임교사 실무 경험을 바탕으로, 교사가 누리과정 영역에 맞는 그림책과 확장 놀이를 설계하는 시간을 줄이기 위해 기획·개발했습니다.",
+          "검색어 추출 → 후보 도서 수집 → 필터링 파이프라인을 구축했으며, 실제 검색된 도서 근거(근거 1~4)만을 바탕으로 답변하도록 할루시네이션 제어 프롬프트를 적용했습니다."
+        ]
+      },
+      {
+        id: "zep-edu",
+        category: "edtech",
+        categoryLabel: "03. COLLABO · 메타버스 기획",
+        title: "ZEP 메타버스 유아 교육 프로젝트",
+        desc: "유아 직업·영역별 놀이 체험 맵 및 5단계 스토리텔링 기반 통일 교육 방탈출 메타버스 게임을 기획·구축했습니다.",
+        folder: "",
+        tech: ["ZEP Metaverse", "게임화(Gamification)", "유아교육과정 설계"],
+        detail: [
+          "유아의 흥미와 자발적 몰입을 이끌기 위해 놀이 영역 탐색 맵과 단계별 스토리텔링 미션(방탈출 형식)을 ZEP 환경에 구현했습니다.",
+          "학습 목표를 직관적인 공간 동선과 상호작용 오브젝트로 풀어내어 디지털 환경에서도 유아 중심 놀이 경험이 이어지도록 설계했습니다."
+        ]
+      },
+      {
+        id: "scratch-edu",
+        category: "edtech",
+        categoryLabel: "03. COLLABO · SW 교육 설계",
+        title: "스크래치 기반 유아 언어 교육 프로그램",
+        desc: "캐릭터 ‘코캣’과 함께 한글 자음·모음을 탐색하며 방향키 조작과 기초 컴퓨팅 사고력을 익히는 인터랙티브 언어 놀이 프로그램입니다.",
+        folder: "",
+        tech: ["Scratch", "유아 언어교육", "인터랙티브 콘텐츠"],
+        detail: [
+          "유아가 친숙한 고양이 캐릭터를 직접 조작하며 한글 자음을 탐색할 수 있도록 시각·청각 피드백을 결합한 코딩 기반 언어 놀이 모듈을 설계했습니다."
         ]
       },
       {
@@ -788,6 +905,7 @@
       filtered.forEach(p => {
         const card = document.createElement("article");
         card.className = "project-card";
+        const githubUrl = p.folder ? `${REPO_BASE}/${p.folder}` : "https://github.com/juhee-16/portfolio";
         card.innerHTML = `
           <div>
             <div class="card-category">${p.categoryLabel}</div>
@@ -800,7 +918,7 @@
             </div>
             <div class="card-footer">
               <span class="link-detail" onclick="openModal('${p.id}')">상세 보기 →</span>
-              <a class="link-code" href="${REPO_BASE}/${p.folder}" target="_blank">GitHub 폴더 ↗</a>
+              <a class="link-code" href="${githubUrl}" target="_blank">GitHub ↗</a>
             </div>
           </div>
         `;
@@ -823,7 +941,7 @@
       document.getElementById("modalTitle").textContent = p.title;
       document.getElementById("modalBody").innerHTML = p.detail.map(text => `<p>${text}</p>`).join("");
       document.getElementById("modalTech").innerHTML = p.tech.map(t => `<span class="tech-badge">${t}</span>`).join("");
-      document.getElementById("modalGithubLink").href = `${REPO_BASE}/${p.folder}`;
+      document.getElementById("modalGithubLink").href = p.folder ? `${REPO_BASE}/${p.folder}` : "https://github.com/juhee-16/portfolio";
       document.getElementById("modalBackdrop").classList.add("open");
     }
 
