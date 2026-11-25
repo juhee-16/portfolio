@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>👩‍🏫 교사 대시보드 - Nuri Town (누리타운)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Pretendard:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background: linear-gradient(180deg, #e0f2fe 0%, #f0fdf4 100%);
+      min-height: 100vh;
+      color: #1e293b;
+    }
+    .jua { font-family: 'Jua', sans-serif; }
+
+    header {
+      background: white;
+      border-bottom: 3px solid #bae6fd;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav-btn {
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 13.5px;
+      background: #f1f5f9;
+      color: #334155;
+    }
+    .nav-btn.active { background: #0284c7; color: white; }
+
+    .container {
+      max-width: 1380px;
+      margin: 20px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 960px) { .container { grid-template-columns: 1fr; } }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    label { display: block; font-size: 13px; font-weight: 800; color: #475569; margin-bottom: 5px; }
+    .input-el {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1.5px solid #cbd5e1;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+    .chip-btn {
+      font-size: 11.5px; font-weight: 700; padding: 4px 9px; border-radius: 999px;
+      background: #e0f2fe; color: #0369a1; border: none; cursor: pointer;
+    }
+
+    .btn-gen {
+      background: linear-gradient(135deg, #f97316, #fb923c);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 15px;
+      font-family: 'Jua', sans-serif;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 5px 0 #c2410c;
+    }
+    .btn-gen:disabled { opacity: 0.7; cursor: wait; }
+
+    .info-box {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px;
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    .log-box {
+      background: #0f172a;
+      color: #f1f5f9;
+      border-radius: 16px;
+      padding: 14px;
+      font-size: 12.5px;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .log-line {
+      padding: 7px 10px;
+      border-radius: 9px;
+      background: rgba(255,255,255,0.07);
+      border-left: 3px solid #38bdf8;
+    }
+    .log-line.warn { border-left-color: #fbbf24; color: #fde68a; }
+    .log-line.ok { border-left-color: #4ade80; color: #bbf7d0; }
+    .log-line.replan {
+      border-left-color: #f97316;
+      background: rgba(249, 115, 22, 0.16);
+      color: #fed7aa;
+      font-weight: 700;
+    }
+
+    .saved-row {
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 11px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .empty-guide {
+      background: linear-gradient(135deg, #f0f9ff, #fefce8);
+      border: 2.5px dashed #7dd3fc;
+      border-radius: 20px;
+      padding: 36px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span style="font-size:26px;">🌈</span>
+      <div>
+        <h1 class="jua" style="font-size:22px;">Nuri Town 교사 대시보드</h1>
+        <span id="teacher-welcome" style="font-size:12px; color:#64748b; font-weight:700;">환영합니다, 선생님!</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="/index" class="nav-btn active">📋 놀이 설계 & AI 리포트</a>
+      <a href="/detail" class="nav-btn">👶 우리 반 원아 관리</a>
+      <a href="/play" class="nav-btn" style="background:#fef08a; color:#854d0e;">🧒 아이 놀이 화면 실행</a>
+      <a href="/" class="nav-btn">🚪 로그인 화면</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- 좌측: 오늘의 놀이 코스 생성 -->
+    <section class="card">
+      <h2 class="jua" style="font-size:21px; color:#ea580c;">🎒 오늘의 놀이 & 현장 체험 설계</h2>
+
+      <div>
+        <label>🏫 우리 반 이름</label>
+        <input type="text" id="class_name" class="input-el" value="라온다솜반" placeholder="예: 라온다솜반, 햇살반, 푸른반" onchange="saveClassName()" />
+      </div>
+
+      <div>
+        <label>🎨 놀이 주제</label>
+        <input type="text" id="theme" class="input-el" value="공룡과 자연" />
+        <div class="chip-row">
+          <button type="button" class="chip-btn" onclick="document.getElementById('theme').value='공룡과 자연'">🦕 공룡과 자연</button>
+          <button type="button" class="chip-btn" onclick="document.getElementById('theme').value='반짝이는 우주와 별'">🚀 우주와 별</button>
+          <button type="button" class="chip-btn" onclick="document.getElementById('theme').value='바닷속 친구들'">🐳 바닷속 친구들</button>
+        </div>
+      </div>
+
+      <div>
+        <label>📍 희망 지역</label>
+        <input type="text" id="region" class="input-el" value="용인" />
+      </div>
+
+      <div>
+        <label>📅 실제 견학 예정 요일 (평일 휴무일 검증)</label>
+        <select id="visit_day" class="input-el">
+          <option value="월요일">월요일 (휴관일 자동 회피 검증)</option>
+          <option value="화요일">화요일 (평일 견학)</option>
+          <option value="수요일" selected>수요일 (평일 견학)</option>
+          <option value="목요일">목요일 (평일 견학)</option>
+          <option value="금요일">금요일 (평일 견학)</option>
+        </select>
+      </div>
+
+      <div>
+        <label>💰 1인당 최대 예산 (원)</label>
+        <input type="number" id="budget" class="input-el" value="15000" step="1000" />
+        <div class="chip-row">
+          <button type="button" class="chip-btn" onclick="document.getElementById('budget').value=5000">💸 5,000원 (도서관 무료 대출)</button>
+          <button type="button" class="chip-btn" onclick="document.getElementById('budget').value=15000">💳 15,000원</button>
+        </div>
+      </div>
+
+      <button id="gen-btn" class="btn-gen" onclick="generatePlan()">
+        ✨ AI 탐험 월드 생성하기
+      </button>
+      <div id="context-hint" style="font-size:12px; color:#64748b; line-height:1.45;"></div>
+    </section>
+
+    <!-- 우측: 교사 검증 & 현장 체험 리포트 + 보관함 -->
+    <section class="card">
+      <div id="empty-state" class="empty-guide">
+        <div style="font-size:44px;">🗺️</div>
+        <h2 class="jua" style="font-size:24px; color:#0369a1;">어디로 탐험을 떠날까요?</h2>
+        <p style="font-size:14.5px; color:#475569; font-weight:600; line-height:1.6;">
+          왼쪽에서 우리 반 놀이 주제와 지역·예산을 정한 뒤<br/>
+          <strong style="color:#ea580c;">[✨ AI 탐험 월드 생성하기]</strong> 버튼을 눌러 새로운 월드를 만들어 주세요!
+        </p>
+        <span style="font-size:12.5px; color:#64748b;">(또는 아래 보관함에서 기존에 만든 코스를 선택할 수도 있어요)</span>
+      </div>
+
+      <div id="report-area" style="display:none; flex-direction:column; gap:14px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+          <h2 class="jua" id="rep-title" style="font-size:22px; color:#0369a1;">탐험 코스 제목</h2>
+          <a href="/play" style="background:#facc15; color:#713f12; text-decoration:none; padding:8px 14px; border-radius:12px; font-family:'Jua'; font-size:15px; white-space:nowrap;">
+            🧒 이 코스로 아이 놀이 시작 →
+          </a>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="info-box" id="book-box">📖 연계 그림책 정보</div>
+          <div class="info-box" id="place-box">🏛️ 현장 체험 기관 정보</div>
+        </div>
+
+        <div class="info-box" style="background:#f0f9ff; border-color:#bae6fd; display:flex; justify-content:space-between; font-weight:800;">
+          <span id="cost-summary-line">예산 검증 내역</span>
+        </div>
+
+        <h3 class="jua" style="font-size:18px; color:#4338ca;">🤖 LangGraph 제약 조건 검증 & 자동 재계획 로그</h3>
+        <div class="log-box" id="agent-logs"></div>
+      </div>
+
+      <h3 class="jua" style="font-size:18px; margin-top:4px;">📂 저장된 탐험 코스 보관함 (<span id="saved-count">0</span>)</h3>
+      <div id="saved-list" style="display:flex; flex-direction:column; gap:8px; max-height:220px; overflow-y:auto;"></div>
+    </section>
+  </main>
+
+  <script>
+    window._currentCandidates = [];
+    let lastPlanConditions = JSON.parse(localStorage.getItem('nuri_last_conditions') || 'null');
+
+    function renderContextHint() {
+      const hint = document.getElementById('context-hint');
+      if (!hint) return;
+      if (!lastPlanConditions) {
+        hint.textContent = '💡 직전 요청 조건이 기억되며, 다음 생성 시 바뀐 조건만 반영해 이어갈 수 있습니다.';
+        return;
+      }
+      hint.textContent = `💡 직전 설정: ${lastPlanConditions.region} · ${lastPlanConditions.visit_day} · 예산 ${Number(lastPlanConditions.budget || 0).toLocaleString()}원 (주제: ${lastPlanConditions.theme})`;
+    }
+
+    function saveClassName() {
+      const cName = document.getElementById('class_name').value.trim() || '라온다솜반';
+      localStorage.setItem('nuri_class_name', cName);
+    }
+
+    async function generatePlan() {
+      saveClassName();
+      const btn = document.getElementById('gen-btn');
+      btn.disabled = true;
+      btn.textContent = '⏳ 단계별 분석·도구 호출·제약 검증 중...';
+
+      const payload = {
+        child_age: '만 4세',
+        theme: document.getElementById('theme').value.trim() || lastPlanConditions?.theme || '공룡과 자연',
+        region: document.getElementById('region').value.trim() || lastPlanConditions?.region || '용인',
+        visit_day: document.getElementById('visit_day').value,
+        budget: parseInt(document.getElementById('budget').value || '0', 10)
+      };
+
+      try {
+        const res = await fetch('/api/plans/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) {
+          alert(`계획 생성 중 문제가 발생했어요. API 키 또는 서버 설정을 확인해 주세요. (상태 코드: ${res.status})`);
+          return;
+        }
+        const data = await res.json();
+        lastPlanConditions = { ...payload, previous_title: data.title };
+        localStorage.setItem('nuri_last_conditions', JSON.stringify(lastPlanConditions));
+        renderContextHint();
+        renderReport(data);
+        await loadSavedPlans();
+      } catch (err) {
+        alert('네트워크 또는 서버 연결에 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '✨ AI 탐험 월드 생성하기';
+      }
+    }
+
+    function chooseBookByIdx(planId, idx) {
+      const selectedBookObj = window._currentCandidates[idx];
+      if (!selectedBookObj) return;
+      localStorage.setItem(`nuri_chosen_book_${planId}`, JSON.stringify(selectedBookObj));
+      selectPlan(planId);
+    }
+
+    function renderReport(plan) {
+      document.getElementById('empty-state').style.display = 'none';
+      document.getElementById('report-area').style.display = 'flex';
+
+      localStorage.setItem('nuri_active_plan_id', plan.id);
+      const pData = plan.plan_data || {};
+
+      const savedBook = localStorage.getItem('nuri_chosen_book_' + plan.id);
+      if (savedBook) pData.selected_book = JSON.parse(savedBook);
+
+      const book = pData.selected_book || pData.book || {};
+      const currentBookTitle = book.title || '';
+      const place = pData.selected_place || pData.place || {};
+      const cost = pData.cost_summary || {};
+      const logs = pData.agent_logs || [];
+      const candidates = (pData.candidate_books && pData.candidate_books.length) ? pData.candidate_books : [book];
+      window._currentCandidates = candidates;
+
+      const bookQuery = encodeURIComponent(`${book.title || ''}`);
+      const libQuery = encodeURIComponent(`${plan.region || '용인'} 도서관 ${book.title || ''}`);
+
+      document.getElementById('rep-title').textContent = plan.title;
+
+      document.getElementById('book-box').innerHTML = `
+        <strong style="color:#1d4ed8;">📖 추천 그림책 후보 (${candidates.length}권 중 선택)</strong>
+        <div style="display:flex; flex-direction:column; gap:6px; margin-top:8px;">
+          ${candidates.map((b, idx) => {
+            const isSelected = b.title === currentBookTitle;
+            const feeText = (b.applied_cost === 0) ? '무료 대출' : `${(b.applied_cost || b.price || 9900).toLocaleString()}원`;
+            return `
+              <div onclick="chooseBookByIdx(${plan.id}, ${idx})"
+                   style="padding:8px 10px; border-radius:12px; cursor:pointer; border:2px solid ${isSelected ? '#2563eb' : '#e2e8f0'}; background:${isSelected ? '#eff6ff' : 'white'}; display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <div style="font-weight:800; font-size:13px; color:#0f172a;">
+                    ${isSelected ? '✅ ' : ''}${b.title || '추천 그림책'}
+                  </div>
+                  <div style="font-size:11.5px; color:#64748b;">${b.authors || b.author || '작자 미상'} · ${b.publisher || '-'}</div>
+                </div>
+                <span style="font-size:11.5px; font-weight:800; color:#1d4ed8; background:#dbeafe; padding:3px 8px; border-radius:999px;">${feeText}</span>
+              </div>
+            `;
+          }).join('')}
+        </div>
+
+        <div style="margin-top:10px; padding:10px; background:white; border-radius:12px; border:1.5px solid #bfdbfe;">
+          <div style="font-size:12px; color:#334155; line-height:1.5;">
+            <strong>📝 책 소개:</strong> ${book.contents || `아이들과 함께 '${book.title || ''}' 그림책을 읽으며 상상의 나래를 펼쳐보아요.`}
+          </div>
+          <div style="display:flex; gap:6px; margin-top:8px;">
+            <a href="https://search.naver.com/search.naver?query=${libQuery}" target="_blank"
+               style="flex:1; text-align:center; text-decoration:none; background:#dbeafe; color:#1d4ed8; font-weight:800; font-size:12px; padding:7px; border-radius:8px;">
+              🏛️ ${plan.region || '우리 동네'} 도서관 대출 찾기
+            </a>
+            <a href="https://search.shopping.naver.com/book/search?query=${bookQuery}" target="_blank"
+               style="flex:1; text-align:center; text-decoration:none; background:#e0e7ff; color:#4338ca; font-weight:800; font-size:12px; padding:7px; border-radius:8px;">
+              📖 책 상세 · 미리보기
+            </a>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('place-box').innerHTML = `
+        <strong style="color:#b45309;">🏛️ 현장 체험 기관: ${place.name || '-'}</strong><br/>
+        주소: ${place.address || '-'}<br/>
+        휴무일: <strong>${place.rest_date || '-'}</strong> · 입장료: <strong>${(place.applied_cost ?? place.fee_amount ?? 0).toLocaleString()}원</strong>
+      `;
+
+      document.getElementById('cost-summary-line').textContent =
+        `설정 예산: ${(cost.budget ?? plan.budget).toLocaleString()}원  |  도서: ${(cost.book_cost ?? 0).toLocaleString()}원  +  체험: ${(cost.place_cost ?? 0).toLocaleString()}원  =  총 ${(cost.total_cost ?? plan.total_cost).toLocaleString()}원`;
+
+      const logBox = document.getElementById('agent-logs');
+      logBox.innerHTML = logs.map((msg, i) => {
+        let cls = 'log-line';
+        if (msg.includes('재계획')) cls += ' replan';
+        else if (msg.includes('실패') || msg.includes('⚠️')) cls += ' warn';
+        else if (msg.includes('통과') || msg.includes('완성') || msg.includes('✅') || msg.includes('✨')) cls += ' ok';
+        return `<div class="${cls}">#${i + 1} ${msg}</div>`;
+      }).join('');
+    }
+
+    async function loadSavedPlans() {
+      const res = await fetch('/api/plans');
+      const list = await res.json();
+      document.getElementById('saved-count').textContent = list.length;
+      const box = document.getElementById('saved-list');
+      box.innerHTML = list.map(p => `
+        <div class="saved-row">
+          <div>
+            <strong style="font-size:14px;">${p.title}</strong>
+            <div style="font-size:12px; color:#64748b;">${p.visit_day} · 예산 ${p.budget.toLocaleString()}원 → ${p.total_cost.toLocaleString()}원</div>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button type="button" style="background:#e0f2fe; color:#0369a1; border:none; padding:6px 10px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="selectPlan(${p.id})">선택</button>
+            <button type="button" style="background:#fee2e2; color:#dc2626; border:none; padding:6px 10px; border-radius:8px; font-weight:700; cursor:pointer;" onclick="deletePlan(${p.id})">삭제</button>
+          </div>
+        </div>
+      `).join('');
+      return list;
+    }
+
+    async function selectPlan(id) {
+      const res = await fetch(`/api/plans/${id}`);
+      if (res.ok) renderReport(await res.json());
+    }
+
+    async function deletePlan(id) {
+      await fetch(`/api/plans/${id}`, { method: 'DELETE' });
+      loadSavedPlans();
+    }
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      const tName = localStorage.getItem('nuri_teacher_name');
+      if (tName) document.getElementById('teacher-welcome').textContent = `환영합니다, ${tName}!`;
+      const savedClass = localStorage.getItem('nuri_class_name');
+      if (savedClass) document.getElementById('class_name').value = savedClass;
+      renderContextHint();
+      await loadSavedPlans();
+    });
+  </script>
+</body>
+</html>

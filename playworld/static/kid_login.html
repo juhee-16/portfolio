@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🧒 꼬마 탐험가 전용 입장 - Nuri Town</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Pretendard:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background: linear-gradient(180deg, #fef08a 0%, #e0f2fe 55%, #bbf7d0 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      color: #1e293b;
+    }
+    .jua { font-family: 'Jua', sans-serif; letter-spacing: 0.4px; }
+    .kid-gate-box {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 34px;
+      border: 5px solid #fde047;
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.12);
+      padding: 28px;
+      max-width: 780px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .student-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 520px) {
+      .student-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .student-tile {
+      background: #f8fafc;
+      border: 3px solid #e2e8f0;
+      border-radius: 22px;
+      padding: 16px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .student-tile:hover {
+      transform: translateY(-4px);
+      border-color: #fdba74;
+      background: #fff7ed;
+    }
+    .student-tile.selected {
+      border-color: #f97316;
+      background: #ffedd5;
+      transform: scale(1.03);
+      box-shadow: 0 8px 18px rgba(249, 115, 22, 0.22);
+    }
+    .st-avatar { font-size: 46px; line-height: 1.1; }
+    .st-name { font-family: 'Jua', sans-serif; font-size: 20px; margin-top: 6px; color: #0f172a; }
+    .st-age { font-size: 12px; font-weight: 700; color: #64748b; margin-top: 2px; }
+    .st-stamp {
+      display: inline-block;
+      margin-top: 6px;
+      background: #fef9c3;
+      color: #854d0e;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .av-pick {
+      font-size: 28px;
+      padding: 6px 12px;
+      border-radius: 16px;
+      border: 3px solid #e2e8f0;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .av-pick.active {
+      border-color: #f97316;
+      background: #fff7ed;
+      transform: scale(1.12);
+    }
+
+    .name-login-row { display: flex; gap: 8px; }
+    .input-box {
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 2px solid #cbd5e1;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+    }
+    .btn-3d {
+      border: none;
+      border-radius: 16px;
+      font-family: 'Jua', sans-serif;
+      cursor: pointer;
+      padding: 12px 22px;
+      font-size: 18px;
+      background: linear-gradient(180deg, #fb923c, #f97316);
+      color: white;
+      box-shadow: 0 5px 0 #c2410c;
+      transition: transform 0.1s;
+    }
+    .btn-3d:active { transform: translateY(3px); }
+  </style>
+</head>
+<body>
+  <div class="kid-gate-box">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+      <div>
+        <h1 class="jua" style="font-size:32px; color:#0f172a;">🧒 꼬마 탐험가 전용 입장</h1>
+        <p style="font-size:14px; color:#475569; font-weight:600; margin-top:4px;">
+          1. 내 이름을 고르거나 적고 → 2. 오늘 변신할 동물 친구를 선택한 뒤 출발해요!
+        </p>
+      </div>
+      <a href="/" style="text-decoration:none; background:#f1f5f9; color:#475569; padding:8px 14px; border-radius:14px; font-size:13px; font-weight:800;">
+        👩‍🏫 교사 로그인 화면
+      </a>
+    </div>
+
+    <div class="student-grid" id="student-grid">
+      <div style="grid-column:1/-1; text-align:center; padding:24px; color:#64748b;">우리 반 친구들 불러오는 중...</div>
+    </div>
+
+    <div style="background:#fffbeb; border:2px solid #fde68a; border-radius:22px; padding:16px; display:flex; flex-direction:column; gap:12px;">
+      <div class="jua" style="font-size:16px; color:#c2410c;">🎨 오늘 놀이할 내 동물 친구를 골라보아요!</div>
+      <div id="avatar-picker" style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button type="button" class="av-pick active" data-av="🐶" onclick="pickKidAvatar('🐶', this)">🐶</button>
+        <button type="button" class="av-pick" data-av="🐰" onclick="pickKidAvatar('🐰', this)">🐰</button>
+        <button type="button" class="av-pick" data-av="🐻" onclick="pickKidAvatar('🐻', this)">🐻</button>
+        <button type="button" class="av-pick" data-av="🦊" onclick="pickKidAvatar('🦊', this)">🦊</button>
+        <button type="button" class="av-pick" data-av="🐱" onclick="pickKidAvatar('🐱', this)">🐱</button>
+        <button type="button" class="av-pick" data-av="🐯" onclick="pickKidAvatar('🐯', this)">🐯</button>
+        <button type="button" class="av-pick" data-av="🦕" onclick="pickKidAvatar('🦕', this)">🦕</button>
+        <button type="button" class="av-pick" data-av="🐥" onclick="pickKidAvatar('🐥', this)">🐥</button>
+      </div>
+
+      <div class="name-login-row">
+        <input type="text" id="kid-name-input" class="input-box" placeholder="내 이름을 누르거나 직접 입력하세요 (예: 김하준)" oninput="clearTileSelection()" />
+        <button class="btn-3d" onclick="startKidPlay()">놀이 출발! 🚀</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let allStudents = [];
+    let selectedStudentObj = null;
+    let selectedKidAvatar = '🐶';
+
+    async function loadStudents() {
+      const res = await fetch('/api/students');
+      allStudents = await res.json();
+      const grid = document.getElementById('student-grid');
+
+      if (!allStudents.length) {
+        grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:20px; color:#64748b;">등록된 친구가 없어요. 아래에 이름을 적고 출발해도 돼요!</div>';
+        return;
+      }
+
+      grid.innerHTML = allStudents.map((s, idx) => `
+        <div class="student-tile" id="st-tile-${idx}" onclick="selectStudentByIdx(${idx})">
+          <div class="st-avatar">${s.avatar}</div>
+          <div class="st-name">${s.name}</div>
+          <div class="st-age">${s.age}</div>
+          <div class="st-stamp">🏅 스탬프 ${s.stamps}개</div>
+        </div>
+      `).join('');
+    }
+
+    function syncAvatarPicker(avatarEmoji) {
+      selectedKidAvatar = avatarEmoji || '🐶';
+      document.querySelectorAll('.av-pick').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.av === selectedKidAvatar);
+      });
+    }
+
+    function selectStudentByIdx(idx) {
+      const student = allStudents[idx];
+      if (!student) return;
+      selectedStudentObj = student;
+
+      document.querySelectorAll('.student-tile').forEach(el => el.classList.remove('selected'));
+      const tile = document.getElementById(`st-tile-${idx}`);
+      if (tile) tile.classList.add('selected');
+
+      document.getElementById('kid-name-input').value = student.name;
+      syncAvatarPicker(student.avatar);
+    }
+
+    function clearTileSelection() {
+      selectedStudentObj = null;
+      document.querySelectorAll('.student-tile').forEach(el => el.classList.remove('selected'));
+    }
+
+    function pickKidAvatar(em, el) {
+      selectedKidAvatar = em;
+      document.querySelectorAll('.av-pick').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function startKidPlay() {
+      const val = document.getElementById('kid-name-input').value.trim();
+      if (!val) {
+        alert('내 얼굴 카드를 누르거나 이름을 입력해 주세요!');
+        return;
+      }
+
+      const matched = selectedStudentObj || allStudents.find(s => s.name === val);
+      const target = matched
+        ? { ...matched, avatar: selectedKidAvatar }
+        : { id: null, name: val, age: '만 4세', avatar: selectedKidAvatar, stamps: 0 };
+
+      localStorage.setItem('nuri_current_student', JSON.stringify(target));
+      location.href = '/play';
+    }
+
+    window.addEventListener('DOMContentLoaded', loadStudents);
+  </script>
+</body>
+</html>
